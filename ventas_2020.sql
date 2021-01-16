@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: localhost    Database: pruebaplatzi
+-- Host: localhost    Database: analisis_de_negocio
 -- ------------------------------------------------------
 -- Server version	8.0.22
 
@@ -16,81 +16,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `authors`
+-- Table structure for table `ventas_2020`
 --
 
-DROP TABLE IF EXISTS `authors`;
+DROP TABLE IF EXISTS `ventas_2020`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `authors` (
-  `author_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `nationality` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`author_id`),
-  UNIQUE KEY `uniq_author` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `books`
---
-
-DROP TABLE IF EXISTS `books`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `books` (
-  `book_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `author_id` int unsigned DEFAULT NULL,
-  `title` varchar(100) NOT NULL,
-  `year` int NOT NULL DEFAULT '1900',
-  `language` varchar(2) NOT NULL COMMENT 'ISO 639-1 Language code (2 chars)',
-  `cover_url` varchar(500) DEFAULT NULL,
-  `price` double(6,2) DEFAULT NULL,
-  `sellable` tinyint(1) NOT NULL DEFAULT '0',
-  `copies` int NOT NULL DEFAULT '1',
-  `description` text,
-  PRIMARY KEY (`book_id`),
-  UNIQUE KEY `book_language` (`title`,`language`)
-) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `clients`
---
-
-DROP TABLE IF EXISTS `clients`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `clients` (
-  `client_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `birthdate` date DEFAULT NULL,
-  `gender` enum('M','F') DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`client_id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `transactions`
---
-
-DROP TABLE IF EXISTS `transactions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transactions` (
-  `transaction_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `book_id` int unsigned NOT NULL,
-  `client_id` int unsigned NOT NULL,
-  `type` enum('lend','return','sell') NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `finished` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`transaction_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+CREATE TABLE `ventas_2020` (
+  `id_venta` int NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `producto` varchar(155) NOT NULL,
+  `valor` double NOT NULL,
+  PRIMARY KEY (`id_venta`)
+) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -102,4 +40,4 @@ CREATE TABLE `transactions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-16 18:35:40
+-- Dump completed on 2021-01-16 18:43:04
